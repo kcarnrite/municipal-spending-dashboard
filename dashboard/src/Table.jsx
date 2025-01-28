@@ -1,21 +1,28 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 
 function Table({headers, table_content}) {
-    const border_size = "border-1"
+    const APIBASEURL = 'http://localhost:5000/api/'
+    const [tableData, setTableData] = useState([])
+    useEffect(() => {
+        fetch(APIBASEURL + 'category/governance')
+        .then(response => response.json())
+        .then(data => setTableData(data))
+    }, [])
+
     return (
-        <table class="border-collapse table-auto">
+        <table className="border-collapse">
             <thead>
-                <tr class="border-2 border-black bg-slate-200">
+                <tr className="border-2 border-black bg-slate-200">
                     {headers.map((label, idx) => (
-                        <th class="border-2 border-black" key={idx}>{label}</th>
+                        <th className="border-2 border-black" key={idx}>{label}</th>
                     ))}
                 </tr>
             </thead>
             <tbody>
-                    {table_content.map((row, idx) => (
-                        <tr class="border-2 border-black" key={idx}>
+                    {tableData.map((row, idx) => (
+                        <tr className="border-2 border-black" key={idx}>
                             {row.map((item, idx) => (
-                                <td class="border-2 border-black" key={idx}>{item}</td>
+                                <td className="border-2 border-black" key={idx}>{item}</td>
                             ))}
                         </tr>
                     ))}
