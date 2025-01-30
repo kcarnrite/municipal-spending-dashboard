@@ -39,6 +39,6 @@ def get_dataframe():
 def get_governance_data():
     dataframe = get_dataframe()
     governance_data = dataframe[dataframe['Line'] == 240]
-    return_data = governance_data[['Municipality', 'Total expenses']]
+    return_data = governance_data[['Municipality', 'Total expenses', 'Tier']]
     return return_data.values.tolist()
     
