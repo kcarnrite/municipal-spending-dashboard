@@ -3,12 +3,19 @@ import { useState, useEffect } from "react";
 function Table({headers, table_content, filters}) {
     const APIBASEURL = 'http://localhost:5000/api/'
     const [tableData, setTableData] = useState([])
+    const [sortBy, setSortBy] = useState(null);
+    const [descending, setDescending] = useState(false);
     useEffect(() => {
         fetch(APIBASEURL + 'category/governance')
         .then(response => response.json())
-        .then(data => setTableData(data))
+        .then(data => {
+            setTableData(data);
+            console.log(data)
+
+        })
     }, [])
 
+    //TODO: Refactor filtering?
     var tableItems = tableData;
     if(!filters.ST) {
         tableItems = tableItems.filter(item => (
@@ -26,12 +33,50 @@ function Table({headers, table_content, filters}) {
         ));
     }
 
+    function handleSort(id) {
+        if(sortBy == id) {
+             setDescending(!descending);
+        }
+        else {
+            setDescending(true);
+            setSortBy(id);
+        }
+    }
+
+    if(sortBy != null) {
+        tableItems = tableItems.sort((a,b) => {
+        if(a[sortBy] === b[sortBy]) {
+            return 0;
+        }
+
+        if(sortBy != 0) {
+            if(descending) {
+                return parseInt(a[sortBy]) < parseInt(b[sortBy]) ? -1 : 1;
+            }
+            else {
+                return parseInt(a[sortBy]) > parseInt(b[sortBy]) ? -1 : 1;
+            }
+        }
+        else {
+            if(descending) {
+                return a[sortBy] < b[sortBy] ? -1 : 1;
+            }
+            else {
+                return a[sortBy] > b[sortBy] ? -1 : 1;
+            }
+        }
+
+    })
+    }
+    
     return (
         <table className="border-collapse">
             <thead>
                 <tr className="border-2 border-black bg-slate-200">
                     {headers.map((label, idx) => (
-                        <th className="border-2 border-black" key={idx}>{label}</th>
+                        <th className="border-2 border-black" key={idx} onClick={() => handleSort(idx)}>
+                            {label + (sortBy == idx ? (descending ? ' \u2191' : ' \u2193') : "")}
+                        </th>
                     ))}
                 </tr>
             </thead>
