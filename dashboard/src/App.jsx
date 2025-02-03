@@ -4,27 +4,17 @@ import CheckBoxModule from './CheckBoxModule';
 import './index.css'
 
 function App() {
-  const data_headers = ["Label 1", "Label 2"]
+  const data_headers = ["Municipality", "Amount"]
   const data_items = [[23,5], [30,5], [50,1]]
   function handleFilterChange(state, action) {
-    if(action.type == 'ST') {
-      return{
-        ...state,
-        ST: !state.ST,
-      }
+    switch (action.type) {
+      case 'ST':
+        return{...state, ST: !state.ST,}
+      case 'LT':
+        return {...state, LT: !state.LT,}
+      case 'UT':
+        return {...state,UT: !state.UT,}
     }
-      else if(action.type == 'LT') {
-        return {
-          ...state,
-          LT: !state.LT,
-        }
-      }
-      else if(action.type == 'UT') {
-        return {
-          ...state,
-          UT: !state.UT,
-        }
-      }
   }
 
   const [filterState, filterReducer] = useReducer(handleFilterChange,
