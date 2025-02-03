@@ -6,14 +6,12 @@ function Table({headers, table_content, filters}) {
     const [sortBy, setSortBy] = useState(null);
     const [descending, setDescending] = useState(false);
     useEffect(() => {
-        fetch(APIBASEURL + 'category/governance')
+        fetch(APIBASEURL + 'category/' + filters.query)
         .then(response => response.json())
         .then(data => {
             setTableData(data);
-            console.log(data)
-
         })
-    }, [])
+    }, [filters.query])
 
     //TODO: Refactor filtering?
     var tableItems = tableData;

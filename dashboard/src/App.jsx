@@ -2,6 +2,7 @@ import { useState, useReducer } from 'react'
 import Table from './Table';
 import CheckBoxModule from './CheckBoxModule';
 import './index.css'
+import DataSelector from './DataSelector';
 
 function App() {
   const data_headers = ["Municipality", "Amount"]
@@ -14,13 +15,19 @@ function App() {
         return {...state, LT: !state.LT,}
       case 'UT':
         return {...state,UT: !state.UT,}
+      case 'changeQuery':
+        console.log("here")
+        return {...state, query: action.payload}
+      default:
+        throw new Error("Action not declared")
     }
   }
 
   const [filterState, filterReducer] = useReducer(handleFilterChange,
     {ST: true,
       LT: true,
-      UT: true
+      UT: true,
+      query: 'governance'
     }
   );
   return (
@@ -29,6 +36,7 @@ function App() {
       <div>
         <div>
           <CheckBoxModule moduleState={filterState} filterReducer={filterReducer}/>
+          <DataSelector filterDispatch={filterReducer}/>
         </div>
         <div className="self-auto justify-items-center">
         <Table headers={data_headers} table_content={data_items} filters={filterState}/>

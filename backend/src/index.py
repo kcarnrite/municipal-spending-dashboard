@@ -13,9 +13,5 @@ def hello_world():
 
 @app.route("/api/category/<category>", methods=["GET"])
 def get_by_category(category):
-    match category:
-        case 'governance':
-            return_object = data.get_governance_data()
-            return return_object
-        case _:
-            return Respo
+    return_object = data.get_data_by_line(category)
+    return return_object

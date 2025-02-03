@@ -42,3 +42,32 @@ def get_governance_data():
     return_data = governance_data[['Municipality', 'Total expenses', 'Tier']]
     return return_data.values.tolist()
     
+def get_fire_data():
+    dataframe = get_dataframe()
+    fire_data = dataframe[dataframe['Line'] == 410]
+    return_data = fire_data[['Municipality', 'Total expenses', 'Tier']]
+    return return_data.values.tolist()
+
+def get_data_by_line(line):
+    dataframe = get_dataframe()
+    match line:
+        case 'fire':
+            line_data = dataframe[dataframe['Line'] == 410]
+        
+        case 'governance':
+            line_data = dataframe[dataframe['Line'] == 240]
+
+        case 'pavedRoads':
+            line_data = dataframe[dataframe['Line'] == 611]
+        
+        case 'unpavedRoads':
+            line_data = dataframe[dataframe['Line'] == 612]
+
+        case 'police':
+            line_data = dataframe[dataframe['Line'] == 420]
+
+        
+    return_data = line_data[['Municipality', 'Total expenses', 'Tier']]
+    return return_data.values.tolist()
+
+    
