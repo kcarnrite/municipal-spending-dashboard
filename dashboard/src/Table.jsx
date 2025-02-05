@@ -31,19 +31,19 @@ function Table({headers, table_content, filters}) {
     }, [filters.query])
 
     //TODO: Refactor filtering?
-    var tableItems = table;
+    var tableItems = table.data;
     if(!filters.ST) {
-        tableItems = table.data.filter(item => (
+        tableItems = tableItems.filter(item => (
         item[2] != "ST"
         ));
     }
     if(!filters.LT) {
-        tableItems = table.data.filter(item => (
+        tableItems = tableItems.filter(item => (
             item[2] != "LT"
         ));
     }
     if(!filters.UT) {
-        tableItems = table.data.filter(item => (
+        tableItems = tableItems.filter(item => (
             item[2] != "UT"
         ));
     }
@@ -59,7 +59,7 @@ function Table({headers, table_content, filters}) {
     }
 
     if(sortBy != null) {
-        tableItems = table.data.sort((a,b) => {
+        tableItems = tableItems.sort((a,b) => {
         if(a[sortBy] === b[sortBy]) {
             return 0;
         }
@@ -102,7 +102,7 @@ function Table({headers, table_content, filters}) {
                     </tr>
                 </thead>
                 <tbody>
-                        {table.data.map((item, idx) => (
+                        {tableItems.map((item, idx) => (
                             <tr className="border-2 border-black" key={idx}>
                                     <Item data={item} key={idx} />
                             </tr>
