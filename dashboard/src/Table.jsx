@@ -23,12 +23,12 @@ function Table({headers, table_content, filters}) {
     const [descending, setDescending] = useState(false);
     useEffect(() => {
         dispatchTable({type:"FETCH_INIT"})
-        fetch(APIBASEURL + 'category/' + filters.query)
+        fetch(APIBASEURL + `category/${filters.query}/${filters.measurement}`)
         .then(response => response.json())
         .then(data => {
             dispatchTable({type: 'FETCH_SUCCESS', payload: data});
         }).catch(() => dispatchTable({type: 'FETCH_FAIL'}))
-    }, [filters.query])
+    }, [filters.query, filters.measurement])
 
     //TODO: Refactor filtering?
     var tableItems = table.data;
@@ -115,11 +115,12 @@ function Table({headers, table_content, filters}) {
     }
 
 function Item({data}) {
+    console.log(typeof(data[1]))
     return (
         <>
         <td className="border-2 border-black">{data[0]}</td>
         <td className="border-2 border-black tabular-nums text-right">
-            ${data[1].replace(/\B(?=(\d{3})+(?!\d))/g,",")}
+            ${String(data[1]).replace(/\B(?=(\d{3})+(?!\d))/g,",")}
         </td>
         </>
     )

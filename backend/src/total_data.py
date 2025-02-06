@@ -34,6 +34,7 @@ def get_dataframe():
     data.rename(columns=column_mapping, inplace=True)
     data.drop(['Year', 'Asmt Code', 'MAH Code'], axis=1, inplace=True)
     data.replace(',', '', inplace=True, regex=True)
+    data['Municipality'] = data['Municipality'].map(lambda x: ' '.join(x.split(' ')[:-1]).lower())
     return data
 
 def get_governance_data():
@@ -47,6 +48,8 @@ def get_fire_data():
     fire_data = dataframe[dataframe['Line'] == 410]
     return_data = fire_data[['Municipality', 'Total expenses', 'Tier']]
     return return_data.values.tolist()
+
+    
 
 def get_data_by_line(line):
     dataframe = get_dataframe()
@@ -69,5 +72,3 @@ def get_data_by_line(line):
         
     return_data = line_data[['Municipality', 'Total expenses', 'Tier']]
     return return_data.values.tolist()
-
-    

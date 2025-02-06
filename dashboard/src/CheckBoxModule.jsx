@@ -5,12 +5,13 @@ function CheckBoxModule({moduleState, filterReducer }) {
     }
     return (
         <>
-            <label htmlFor="ST">Single Tier</label>
+            <label htmlFor="ST" >Single Tier</label>
             <input 
                 id="ST" 
                 checked={moduleState.ST} 
                 type="checkbox"
                 onClick={handleClick}
+                className="drop-shadow-xl"
             />
             <label htmlFor="LT">Lower Tier</label>
             <input 

@@ -3,6 +3,7 @@ import Table from './Table';
 import CheckBoxModule from './CheckBoxModule';
 import './index.css'
 import DataSelector from './DataSelector';
+import FilterControls from './FilterControls';
 
 function App() {
   const data_headers = ["Municipality", "Amount"]
@@ -18,6 +19,8 @@ function App() {
       case 'changeQuery':
         console.log("here")
         return {...state, query: action.payload}
+      case 'CHANGE_MEASUREMENT':
+        return {...state, measurement: action.payload}
       default:
         throw new Error("Action not declared")
     }
@@ -27,7 +30,8 @@ function App() {
     {ST: true,
       LT: true,
       UT: true,
-      query: 'governance'
+      query: 'governance',
+      measurement: 'total',
     }
   );
   return (
@@ -37,6 +41,7 @@ function App() {
         <div>
           <CheckBoxModule moduleState={filterState} filterReducer={filterReducer}/>
           <DataSelector filterDispatch={filterReducer}/>
+          <FilterControls onFilterChange={filterReducer} filterState={filterState} />
         </div>
         <div className="self-auto justify-items-center">
         <Table headers={data_headers} table_content={data_items} filters={filterState}/>
