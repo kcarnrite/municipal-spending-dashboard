@@ -1,0 +1,19 @@
+services: 
+    db:
+        image: mysql
+        restart: always
+        volumes:
+            - type: bind
+              source: ./db/init.sql
+              target: /docker-entrypoint-initdb.d/init.sql
+        ports: 
+            - 31415:3306
+        environment:
+            MYSQL_ROOT_PASSWORD_FILE: /run/secrets/db_password
+        secrets:
+            - db_password
+
+secrets:
+    db_password:
+        file: ./db/secrets/test.txt
+        
