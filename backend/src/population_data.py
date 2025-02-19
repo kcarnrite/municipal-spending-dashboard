@@ -1,47 +1,24 @@
-import pandas as pd
-import csv
-import total_data as dt
-
-def get_dataframe():
-    data = pd.read_csv('./data/PopulationAllMunicipalities.csv')
-    data["MUNICIPALITY"] = data["MUNICIPALITY"].map(lambda x: x.split(',')[0].lower())
-    return data
-
-
-def get_municipal_population_data():
-    population_data = get_dataframe()
-    category_data = dt.get_dataframe()
-    test_data = pd.merge(population_data, category_data, left_on="MUNICIPALITY", right_on='Municipality', how="inner")
-    return test_data
-
-
-def get_spending_by_population_df():
-    dataframe = get_municipal_population_data()
-    by_population = dataframe.apply(lambda x: round(int(x['Total expenses'])/x['Total Pop'], 2), axis=1)
-    by_population = by_population.rename("Total spending by population")
-    result = dataframe.join(by_population, how='inner')
-    return result
+import municipal_db as db
 
 def get_data_by_category(category):
-    dataframe = get_spending_by_population_df()
     match category:
         case 'fire':
-            line_data = dataframe[dataframe['Line'] == 410]
+            data = db.get_by_capita_data("fire")
         
         case 'governance':
-            line_data = dataframe[dataframe['Line'] == 240]
+            data = db.get_by_capita_data("governance")
 
         case 'pavedRoads':
-            line_data = dataframe[dataframe['Line'] == 611]
+            data = db.get_by_capita_data("roads - paved")
         
         case 'unpavedRoads':
-            line_data = dataframe[dataframe['Line'] == 612]
+            data = db.get_by_capita_data("roads - unpaved")
 
         case 'police':
-            line_data = dataframe[dataframe['Line'] == 420]
+            data = db.get_by_capita_data("Police")
+        case _:
+            Exception("ERROR - NOT IMPLEMENTED")
         
-    return_data = line_data[['Municipality', 'Total spending by population', 'Tier']]
-    print(return_data)
+    return_data = [(x[0],int(x[1]/x[2]),x[3]) for x in data]
 
-    return return_data.values.tolist()
-
+    return return_data
