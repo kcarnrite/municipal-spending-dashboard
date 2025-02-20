@@ -15,7 +15,7 @@ def hello_world():
 @app.route("/api/category/<category>/<measurement>", methods=["GET"])
 def get_by_category(category, measurement):
     if(measurement == 'total'):
-        return_object = tot_data.get_data_by_line(category)
+        return_object = tot_data.get_data_by_category(category)
     elif(measurement == 'perCapita'):
         return_object = pop_data.get_data_by_category(category)
     else:
