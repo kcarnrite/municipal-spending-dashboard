@@ -5,7 +5,11 @@ export default {
     "./index.html",
   ],
   theme: {
-    extend: {},
+    extend: {
+    colors: {
+      "primary": "#1D5101",
+    },
+    },
   },
   plugins: [],
 }
