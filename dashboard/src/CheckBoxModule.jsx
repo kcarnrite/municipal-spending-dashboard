@@ -1,33 +1,31 @@
+import CheckBox from "./CheckBox";
+
 
 function CheckBoxModule({moduleState, filterReducer }) {
-    function handleClick(event) {
+    function handleTierChange(event) {
         filterReducer({type: event.target.id})
     }
     return (
-        <>
-            <label htmlFor="ST" >Single Tier</label>
-            <input 
-                id="ST" 
-                checked={moduleState.ST} 
-                type="checkbox"
-                onClick={handleClick}
-                className="drop-shadow-xl"
+        <div className="flex gap-3">
+            <CheckBox 
+            id="ST" 
+            labelText="Single Tier" 
+            checkedState={moduleState.ST} 
+            onChange={handleTierChange}
             />
-            <label htmlFor="LT">Lower Tier</label>
-            <input 
-                id="LT" 
-                checked={moduleState.LT} 
-                type="checkbox" 
-                onClick={handleClick}
+            <CheckBox
+                id="LT"
+                labelText="Lower Tier"
+                checkedState={moduleState.LT}
+                onChange={handleTierChange}
             />
-            <label htmlFor="UT">Upper Tier</label>
-            <input 
-                id="UT" 
-                checked={moduleState.UT} 
-                type="checkbox" 
-                onClick={handleClick}
+            <CheckBox
+                id="UT"
+                labelText="Upper Tier"
+                checkedState={moduleState.UT}
+                onChange={handleTierChange}
             />
-        </>
+        </div>
     )
 }
 
