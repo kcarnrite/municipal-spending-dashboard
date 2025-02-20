@@ -3,7 +3,7 @@ import { useState, useEffect, useReducer } from "react";
 function dataFetchReducer(state, action) {
     switch (action.type){
         case 'FETCH_INIT':
-            return {...state, isLoading:true};
+            return {...state, isLoading:true, isError:false};
         
         case 'FETCH_FAIL':
             return {...state, isLoading:false, isError:true};
@@ -93,7 +93,7 @@ function Table({headers, table_content, filters}) {
             return (
             <table className="border-collapse">
                 <thead>
-                    <tr className="border-2 border-black bg-slate-200">
+                    <tr className="border-2 border-black bg-neutral-200">
                         {headers.map((label, idx) => (
                             <th className="border-2 border-black" key={idx} onClick={() => handleSort(idx)}>
                                 {label + (sortBy == idx ? (descending ? ' \u2191' : ' \u2193') : "")}
