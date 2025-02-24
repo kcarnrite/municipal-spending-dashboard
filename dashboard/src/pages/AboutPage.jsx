@@ -1,3 +1,11 @@
+import { createRoute } from '@tanstack/react-router'
+import { rootRoute } from '../App';
+
+export const aboutRoute = createRoute({
+    getParentRoute: () => rootRoute,
+    path: '/',
+    component: AboutPage
+  })
 
 function AboutPage() {
     const headerStyling = "text-primary text-2xl";
@@ -47,5 +55,3 @@ function AboutPage() {
         </div>
     )
 }
-
-export default AboutPage;

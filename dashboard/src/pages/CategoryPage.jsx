@@ -1,6 +1,15 @@
 import { useReducer } from "react"
 import FilterControls from "../FilterControls"
 import Table from "../Table"
+import { createRoute } from "@tanstack/react-router"
+import { rootRoute } from "../App"
+
+export const indexRoute = createRoute({
+  getParentRoute: () => rootRoute,
+  path: '/category',
+  component: CategoryPage
+})
+
 
 function CategoryPage() {
   const data_headers = ["Municipality", "Amount"]
@@ -43,5 +52,3 @@ function CategoryPage() {
       </div>
     )
 }
-
-export default CategoryPage;
