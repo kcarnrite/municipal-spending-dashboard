@@ -1,10 +1,11 @@
 import DropdownFilter from "./DropdownFilter";
 import CheckBoxModule from "./CheckBoxModule"
+import CheckBox from "./CheckBox"
 
 
 function FilterControls({filterState, onFilterChange}) {
     return (
-        <div className="mx-30 flex-nowrap flex gap-8">
+        <div className="mx-30 flex-nowrap flex gap-8 my-2">
             <DropdownFilter 
                 options={
                     [{internalValue:"total", displayValue:"Total"},
@@ -29,6 +30,11 @@ function FilterControls({filterState, onFilterChange}) {
             />
 
             <CheckBoxModule moduleState={filterState} filterReducer={onFilterChange} />
+            < CheckBox 
+            id="low-population" 
+            labelText="Hide Low Population Municipalities"
+            checkedState={filterState.hideLowPopulation}
+            onChange = {() => onFilterChange({type: "HIDE_LOW_POPULATION"})} />
         </div>
     );
 

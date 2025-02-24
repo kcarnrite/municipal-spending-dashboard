@@ -27,6 +27,8 @@ function CategoryPage() {
         return {...state, query: action.payload}
       case 'CHANGE_MEASUREMENT':
         return {...state, measurement: action.payload}
+      case "HIDE_LOW_POPULATION":
+        return {...state, hideLowPopulation: !state.hideLowPopulation }
       default:
         throw new Error("Action not declared")
     }
@@ -36,13 +38,14 @@ function CategoryPage() {
     {ST: true,
       LT: true,
       UT: true,
+      hideLowPopulation: true,
       query: 'governance',
       measurement: 'total',
     }
   );
     return (
-        <div className="flex content-center flex-col grow-0">
-        <h1 className="text-center text-4xl font-bold font-mono text-green-900" >Municipal Spending Dashboard</h1>
+        <div className="flex content-center flex-col grow-0 mx-32">
+        <h1 className="text-center text-4xl font-bold font-mono text-green-900" >Spending By Category</h1>
         <div>
             <FilterControls onFilterChange={filterReducer} filterState={filterState} />
             <div className="self-auto justify-items-center">
