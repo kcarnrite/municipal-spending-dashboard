@@ -1,4 +1,4 @@
-from flask import Flask
+from flask import Flask, request
 from flask_cors import CORS
 import total_data as tot_data
 import population_data as pop_data
@@ -14,10 +14,11 @@ def hello_world():
 
 @app.route("/api/category/<category>/<measurement>", methods=["GET"])
 def get_by_category(category, measurement):
+    min_population = request.args.get('minPopulation')
     if(measurement == 'total'):
-        return_object = tot_data.get_data_by_category(category)
+        return_object = tot_data.get_data_by_category(category, min_population)
     elif(measurement == 'perCapita'):
-        return_object = pop_data.get_data_by_category(category)
+        return_object = pop_data.get_data_by_category(category, min_population)
     else:
         print(measurement)
         print(category)

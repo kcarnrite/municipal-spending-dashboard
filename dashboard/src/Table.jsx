@@ -21,14 +21,18 @@ function Table({headers, table_content, filters}) {
     const [table, dispatchTable] = useReducer(dataFetchReducer,{data: [], isLoading: false, isError: false})
     const [sortBy, setSortBy] = useState(null);
     const [descending, setDescending] = useState(false);
+    var minimumPopulation = 0
+    filters.hideLowPopulation ? minimumPopulation = 10000 : minimumPopulation = 0;
     useEffect(() => {
         dispatchTable({type:"FETCH_INIT"})
-        fetch(APIBASEURL + `category/${filters.query}/${filters.measurement}`)
+        fetch(APIBASEURL + `category/${filters.query}/${filters.measurement}?` + new URLSearchParams({
+            minPopulation: minimumPopulation,
+        }).toString())
         .then(response => response.json())
         .then(data => {
             dispatchTable({type: 'FETCH_SUCCESS', payload: data});
         }).catch(() => dispatchTable({type: 'FETCH_FAIL'}))
-    }, [filters.query, filters.measurement])
+    }, [filters.query, filters.measurement, filters.hideLowPopulation])
 
     //TODO: Refactor filtering?
     var tableItems = table.data;
