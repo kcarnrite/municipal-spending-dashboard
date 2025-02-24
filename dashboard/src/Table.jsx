@@ -119,7 +119,6 @@ function Table({headers, table_content, filters}) {
     }
 
 function Item({data}) {
-    console.log(typeof(data[1]))
     return (
         <>
         <td className="border-2 border-black">{data[0]}</td>
