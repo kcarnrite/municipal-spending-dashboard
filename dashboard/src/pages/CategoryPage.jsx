@@ -23,7 +23,6 @@ function CategoryPage() {
       case 'UT':
         return {...state,UT: !state.UT,}
       case 'CHANGE_QUERY':
-        console.log("here")
         return {...state, query: action.payload}
       case 'CHANGE_MEASUREMENT':
         return {...state, measurement: action.payload}
