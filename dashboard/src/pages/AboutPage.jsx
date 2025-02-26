@@ -52,6 +52,16 @@ function AboutPage() {
                 elected officials from the sub-municipalities in the region.
             </p>
         </div>
+
+        <div className={paragraphSpacing}>
+            <h1 className={headerStyling}>Final Remarks</h1>
+            <p className={paragraphStyling}>
+                This project was created by me as a personal project with the primary goal of developing skills while exploring a personal interest.
+                While I have done my best to gather and display data accurately, there is always a chance that something may not be
+                correct. If something doesn't look right I would suggest following the links to the data I have provided and pulling
+                the data yourself for analysis.
+            </p>
+        </div>
         </div>
     )
 }
