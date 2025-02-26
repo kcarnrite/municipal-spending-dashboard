@@ -25,7 +25,7 @@ function Table({headers, table_content, filters}) {
     filters.hideLowPopulation ? minimumPopulation = 10000 : minimumPopulation = 0;
     useEffect(() => {
         dispatchTable({type:"FETCH_INIT"})
-        fetch(APIBASEURL + `category/${filters.query}/${filters.measurement}?` + new URLSearchParams({
+        fetch(APIBASEURL + `line/${filters.query}/${filters.measurement}?` + new URLSearchParams({
             minPopulation: minimumPopulation,
         }).toString())
         .then(response => response.json())
@@ -99,7 +99,7 @@ function Table({headers, table_content, filters}) {
                 <thead>
                     <tr className="border-2 border-black bg-neutral-200">
                         {headers.map((label, idx) => (
-                            <th className="border-2 border-black" key={idx} onClick={() => handleSort(idx)}>
+                            <th className="border-2 border-black mx-4" key={idx} onClick={() => handleSort(idx)}>
                                 {label + (sortBy == idx ? (descending ? ' \u2191' : ' \u2193') : "")}
                             </th>
                         ))}
@@ -121,7 +121,7 @@ function Table({headers, table_content, filters}) {
 function Item({data}) {
     return (
         <>
-        <td className="border-2 border-black">{data[0]}</td>
+        <td className="border-2 border-black m-2">{data[0]}</td>
         <td className="border-2 border-black tabular-nums text-right">
             ${String(data[1]).replace(/\B(?=(\d{3})+(?!\d))/g,",")}
         </td>

@@ -1,9 +1,24 @@
 import DropdownFilter from "./DropdownFilter";
 import CheckBoxModule from "./CheckBoxModule"
 import CheckBox from "./CheckBox"
+import { useEffect, useState } from "react";
+const APIBASEURL = 'http://localhost:5000/api/'
 
 
 function FilterControls({filterState, onFilterChange}) {
+    const [categories, setCategories] = useState(["Loading..."])
+    useEffect(() => {
+        fetch(`${APIBASEURL}/get_categories`)
+        .then(response => response.json())
+        .then(data => setCategories(data))
+    }, [])
+    console.log(categories)
+    var category_values = []
+    for(var category in categories) {
+        var line_number = categories[category][0]
+        var value = categories[category][1]
+        category_values.push({internalValue: line_number, displayValue: value});
+    }
     return (
         <div className="mx-30 flex-nowrap flex gap-8 my-2">
             <DropdownFilter 
@@ -16,14 +31,16 @@ function FilterControls({filterState, onFilterChange}) {
             />
 
             <DropdownFilter
-                options={
+                options={category_values
+                    /*
                     [
                         {displayValue: "Governance", internalValue: "governance"},
                         {displayValue: "Fire", internalValue: "fire"},
                         {displayValue: "Police", internalValue: "police"},
-                        {displayValue: "Paved Roads", internalValue: "pavedRoads"},
-                        {displayValue: "Unpaved Roads", internalValue: "unpavedRoads"},
+                        {displayValue: "Paved Roads", internalValue: "paved Roads"},
+                        {displayValue: "Unpaved Roads", internalValue: "unpaved Roads"},
                     ]
+                        */
                 }
                 onSelection={(event) => onFilterChange({type: 'CHANGE_QUERY', payload:event.target.value})}
                 currentValue={filterState.query}
