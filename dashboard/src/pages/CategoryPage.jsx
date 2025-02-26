@@ -39,7 +39,7 @@ function CategoryPage() {
       LT: true,
       UT: true,
       hideLowPopulation: true,
-      query: 'governance',
+      query: '240',
       measurement: 'total',
     }
   );
