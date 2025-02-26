@@ -13,9 +13,6 @@ function FilterControls({filterState, onFilterChange}) {
         .then(data => setCategories(data))
     }, [])
     var category_values = [];
-    if(!categories) {
-        category_values = [{internalValue: 240, displayValue: 'Governance'}]
-    }
     for(var category in categories) {
         var line_number = categories[category][0]
         var value = categories[category][1]
