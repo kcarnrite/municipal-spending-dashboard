@@ -25,3 +25,8 @@ def get_by_capita_data(category, min_population):
     data = execute_query(query, [category, min_population])
     return data
 
+
+def get_categories():
+    query ="SELECT line_number, category FROM Categories"
+    data = execute_query(query)
+    return data
