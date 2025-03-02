@@ -30,17 +30,7 @@ function FilterControls({filterState, onFilterChange}) {
             />
 
             <DropdownFilter
-                options={category_values
-                    /*
-                    [
-                        {displayValue: "Governance", internalValue: "governance"},
-                        {displayValue: "Fire", internalValue: "fire"},
-                        {displayValue: "Police", internalValue: "police"},
-                        {displayValue: "Paved Roads", internalValue: "paved Roads"},
-                        {displayValue: "Unpaved Roads", internalValue: "unpaved Roads"},
-                    ]
-                        */
-                }
+                options={category_values}
                 onSelection={(event) => onFilterChange({type: 'CHANGE_QUERY', payload:event.target.value})}
                 currentValue={filterState.query}
             />
