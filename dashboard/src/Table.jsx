@@ -1,4 +1,5 @@
 import { useState, useEffect, useReducer } from "react";
+const APIBASEURL = 'http://localhost:5000/api/'
 
 function dataFetchReducer(state, action) {
     switch (action.type){
@@ -16,8 +17,7 @@ function dataFetchReducer(state, action) {
     }
 }
 
-function Table({headers, table_content, filters}) {
-    const APIBASEURL = 'http://localhost:5000/api/'
+function Table({headers, filters}) {
     const [table, dispatchTable] = useReducer(dataFetchReducer,{data: [], isLoading: false, isError: false})
     const [sortBy, setSortBy] = useState(null);
     const [descending, setDescending] = useState(false);
@@ -34,7 +34,19 @@ function Table({headers, table_content, filters}) {
         }).catch(() => dispatchTable({type: 'FETCH_FAIL'}))
     }, [filters.query, filters.measurement, filters.hideLowPopulation])
 
-    //TODO: Refactor filtering?
+    function handleSort(id) {
+        if(sortBy == id) {
+             setDescending(!descending);
+        }
+        else {
+            setDescending(true);
+            setSortBy(id);
+        }
+    }
+
+
+
+    // Filter table items depending on filter state without altering data state 
     var tableItems = table.data;
     if(!filters.ST) {
         tableItems = tableItems.filter(item => (
@@ -50,16 +62,6 @@ function Table({headers, table_content, filters}) {
         tableItems = tableItems.filter(item => (
             item[2] != "UT"
         ));
-    }
-
-    function handleSort(id) {
-        if(sortBy == id) {
-             setDescending(!descending);
-        }
-        else {
-            setDescending(true);
-            setSortBy(id);
-        }
     }
 
     if(sortBy != null) {
