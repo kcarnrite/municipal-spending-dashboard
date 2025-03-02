@@ -2,11 +2,12 @@ from flask import Flask, request
 from flask_cors import CORS
 import population_data as pop_data
 import municipal_db as db
+from constants import FRONTEND_HOSTS
 
 app = Flask(__name__)
 #TODO: CONFIGURE CORS CORRECTLY
-#CORS(app, resources={'*': {'origins': 'localhost:5173'}})
-CORS(app)
+CORS(app, origins=FRONTEND_HOSTS)
+#CORS(app)
 
 @app.route("/")
 def hello_world():
