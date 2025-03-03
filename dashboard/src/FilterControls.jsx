@@ -8,7 +8,7 @@ const APIBASEURL = 'http://localhost:5000/api/'
 function FilterControls({filterState, onFilterChange}) {
     const [categories, setCategories] = useState([])
     useEffect(() => {
-        fetch(`${APIBASEURL}/get_categories`)
+        fetch(`${APIBASEURL}get_categories`)
         .then(response => response.json())
         .then(data => setCategories(data))
     }, [])
