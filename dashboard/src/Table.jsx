@@ -19,7 +19,7 @@ function dataFetchReducer(state, action) {
 
 function Table({headers, filters}) {
     const [table, dispatchTable] = useReducer(dataFetchReducer,{data: [], isLoading: false, isError: false})
-    const [sortBy, setSortBy] = useState(null);
+    const [sortBy, setSortBy] = useState(1);
     const [descending, setDescending] = useState(false);
     var minimumPopulation = 0
     filters.hideLowPopulation ? minimumPopulation = 10000 : minimumPopulation = 0;
