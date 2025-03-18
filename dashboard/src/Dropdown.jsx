@@ -7,6 +7,7 @@ function Dropdown({ text, children, className}) {
     useEffect(() => {
         function handleClickOutside() {
             if(dropdownRef.current && !dropdownRef.current.contains(event.target)) {
+                console.log("HANDLE CLICK ACTIVATED")
                 setListActive(false)
             }
         }
@@ -19,8 +20,11 @@ function Dropdown({ text, children, className}) {
             document.removeEventListener('mousedown', handleClickOutside);
         };
     }, [listActive])
-    const handleClick = () => {
-        setListActive(!listActive)
+    const handleClick = (event) => {
+        setListActive(true)
+        if(event.target.dataset.type == 'item') {
+            setListActive(false)
+        }
     }
     return (
         <div onClick={handleClick} className={className} ref={dropdownRef}>
@@ -36,18 +40,16 @@ function SubList({ text, children }) {
         setListActive(!listActive)
     }
     return (
-        <div onClick={handleClick}>
-            <p>{text}</p>
+        <>
+            <p data-type="sublist" onClick={handleClick}>{text}</p>
             {listActive ? children : null}
-        </div>
+        </>
     )
 }
 
 function ListItem({ text, onClick}) {
     return (
-        <div onClick={onClick}>
-            <p>{text}</p>
-        </div>
+        <p data-type="item" onClick={onClick}>{text}</p>
     );
 }
 
