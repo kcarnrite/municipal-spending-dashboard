@@ -80,7 +80,7 @@ function FilterControls({filterState, onFilterChange}) {
                     <ListItem text='Total' onClick={event => onFilterChange({type:'CHANGE_QUERY', payload:9910})}/>
                     </>
                     
-                    ) : 'Loading...'
+                    ) : <ListItem text='Loading...'/>
                 }
                 </Dropdown>
                 
