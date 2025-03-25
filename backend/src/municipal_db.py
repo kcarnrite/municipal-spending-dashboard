@@ -26,7 +26,7 @@ def get_by_capita_data(line_number, min_population):
     return data
 
 
-def get_categories():
-    query ="SELECT line_number, category FROM Categories"
-    data = execute_query(query)
+def get_categories(line_start=0, line_end=10000):
+    query ="SELECT line_number, category FROM Categories WHERE line_number BETWEEN %s AND %s"
+    data = execute_query(query, [line_start, line_end])
     return data

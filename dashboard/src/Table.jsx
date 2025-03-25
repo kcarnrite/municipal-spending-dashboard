@@ -25,7 +25,7 @@ function Table({headers, filters}) {
     filters.hideLowPopulation ? minimumPopulation = 10000 : minimumPopulation = 0;
     useEffect(() => {
         dispatchTable({type:"FETCH_INIT"})
-        fetch(APIBASEURL + `line/${filters.query}/${filters.measurement}?` + new URLSearchParams({
+        fetch(APIBASEURL + `line/${filters.query}/${filters.measurement[1]}?` + new URLSearchParams({
             minPopulation: minimumPopulation,
         }).toString())
         .then(response => response.json())

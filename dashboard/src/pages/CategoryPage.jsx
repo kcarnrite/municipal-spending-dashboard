@@ -39,7 +39,7 @@ function CategoryPage() {
       UT: true,
       hideLowPopulation: true,
       query: '240',
-      measurement: 'total',
+      measurement: ['Per Capita', 'perCapita'],
     }
   );
     return (
