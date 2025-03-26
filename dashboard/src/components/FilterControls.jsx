@@ -2,6 +2,7 @@ import CheckBoxModule from "./CheckBoxModule"
 import CheckBox from "./CheckBox"
 import { Dropdown, ListItem, SubList } from './Dropdown';
 import { useEffect, useState } from "react";
+import MoreFilters from "./MoreFilters";
 import SearchBar from "./SearchBar";
 const APIBASEURL = 'http://localhost:5000/api/'
 
@@ -15,16 +16,13 @@ function FilterControls({filterState, onFilterChange}) {
     }, [])
 
     return (
-        <div className="mx-30 flex-nowrap flex gap-8 my-2">
+        <div className="mx-30 md:flex-nowrap flex-wrap flex gap-8 my-2">
             <SearchBar 
                 searchState={filterState.searchTerm} 
                 setSearchState={event => onFilterChange({type: 'CHANGE_SEARCH_TERM', payload:event.target.value})}/>
             
             <div className="flex flex-row gap-4">
-                <Dropdown text={filterState.measurement[0]}>
-                    <ListItem text="Total" onClick={(event) => onFilterChange({type:'CHANGE_MEASUREMENT', payload:["Total", "total"]})} />
-                    <ListItem text="Per Capita" onClick={(event => onFilterChange({type:'CHANGE_MEASUREMENT', payload:["Per Capita", 'perCapita']}))} />
-                </Dropdown>
+                
       
                 <Dropdown text="Category">
                 {
@@ -87,17 +85,24 @@ function FilterControls({filterState, onFilterChange}) {
                 }
                 </Dropdown>
                 
+                <Dropdown text={filterState.measurement[0]}>
+                    <ListItem text="Total" onClick={(event) => onFilterChange({type:'CHANGE_MEASUREMENT', payload:["Total", "total"]})} />
+                    <ListItem text="Per Capita" onClick={(event => onFilterChange({type:'CHANGE_MEASUREMENT', payload:["Per Capita", 'perCapita']}))} />
+                </Dropdown>
       
         </div>
 
             
-
-            {/*<CheckBoxModule moduleState={filterState} filterReducer={onFilterChange} />*/}
-            < CheckBox 
-            id="low-population" 
-            labelText="Hide Low Population Municipalities"
-            checkedState={filterState.hideLowPopulation}
-            onChange = {() => onFilterChange({type: "HIDE_LOW_POPULATION"})} />
+            <MoreFilters>
+                <div>
+                    <p className='text-lg font-bold'>Population:</p>
+                    < CheckBox 
+                    id="low-population" 
+                    labelText="Hide Low Population Municipalities"
+                    checkedState={filterState.hideLowPopulation}
+                    onChange = {() => onFilterChange({type: "HIDE_LOW_POPULATION"})} />
+                </div>
+            </MoreFilters>
         </div>
     );
 

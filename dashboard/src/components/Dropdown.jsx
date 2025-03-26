@@ -64,7 +64,7 @@ function SubList({ text, children }) {
     return (
         <div onClick={handleClick} data-type="sublist" className="flex flex-row select-none px-6 bg-gray-100 hover:bg-gray-300" ref={dropdownRef}>
             <p data-type="sublist">{text}</p>
-            <div className="flex flex-col absolute left-full shadow-lg w-fit ">
+            <div className="flex flex-col absolute md:left-full shadow-lg w-fit ">
                 {listActive ? children : null}
             </div>
         </div>
