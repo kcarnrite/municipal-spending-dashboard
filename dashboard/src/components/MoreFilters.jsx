@@ -1,10 +1,28 @@
-import { useState } from "react";
+import { useState, useRef, useEffect } from "react";
 
 function MoreFilters({children}) {
+    var dropdownRef = useRef(null);
     const [isActive, setIsActive] = useState(false)
+
+    useEffect(() => {
+        function handleClickOutside() {
+            if(dropdownRef.current && !dropdownRef.current.contains(event.target)) {
+                setIsActive(false);
+            }
+        }
+
+            if(isActive) {
+                document.addEventListener('mousedown', handleClickOutside);
+            }
+        
+            return() => {
+                document.removeEventListener('mousedown', handleClickOutside);
+            };
+    }, [isActive])
     return (
         <div 
-            className="shadow-md invisible md:visible rounded-md select-none">
+            className="shadow-md invisible md:visible rounded-md select-none"
+            ref={dropdownRef}>
              
             <div className='hover:bg-gray-300 px-4 rounded-md' onClick={() => setIsActive(!isActive)}>
                 <p >More Filters</p>
