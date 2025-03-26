@@ -63,6 +63,9 @@ function Table({headers, filters}) {
             item[2] != "UT"
         ));
     }
+    if(filters.searchTerm) {
+        tableItems = tableItems.filter(item => item[0].toUpperCase().includes(filters.searchTerm.toUpperCase()))
+    }
 
     if(sortBy != null) {
         tableItems = tableItems.sort((a,b) => {
@@ -118,6 +121,7 @@ function Table({headers, filters}) {
        
             )
         }
+    
     }
 
 function Item({data}) {

@@ -1,6 +1,6 @@
 import { useReducer } from "react"
-import FilterControls from "../FilterControls"
-import Table from "../Table"
+import FilterControls from "../components/FilterControls"
+import Table from "../components/Table"
 import { createRoute } from "@tanstack/react-router"
 import { rootRoute } from "../App"
 
@@ -28,6 +28,8 @@ function CategoryPage() {
         return {...state, measurement: action.payload}
       case "HIDE_LOW_POPULATION":
         return {...state, hideLowPopulation: !state.hideLowPopulation }
+      case 'CHANGE_SEARCH_TERM':
+        return {...state, searchTerm: action.payload}
       default:
         throw new Error("Action not declared")
     }
@@ -40,6 +42,7 @@ function CategoryPage() {
       hideLowPopulation: true,
       query: '240',
       measurement: ['Per Capita', 'perCapita'],
+      searchTerm: '',
     }
   );
     return (

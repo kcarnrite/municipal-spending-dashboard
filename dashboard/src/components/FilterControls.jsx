@@ -1,8 +1,8 @@
-import DropdownFilter from "./DropdownFilter";
 import CheckBoxModule from "./CheckBoxModule"
 import CheckBox from "./CheckBox"
 import { Dropdown, ListItem, SubList } from './Dropdown';
 import { useEffect, useState } from "react";
+import SearchBar from "./SearchBar";
 const APIBASEURL = 'http://localhost:5000/api/'
 
 
@@ -16,6 +16,9 @@ function FilterControls({filterState, onFilterChange}) {
 
     return (
         <div className="mx-30 flex-nowrap flex gap-8 my-2">
+            <SearchBar 
+                searchState={filterState.searchTerm} 
+                setSearchState={event => onFilterChange({type: 'CHANGE_SEARCH_TERM', payload:event.target.value})}/>
             
             <div className="flex flex-row gap-4">
                 <Dropdown text={filterState.measurement[0]}>
@@ -89,7 +92,7 @@ function FilterControls({filterState, onFilterChange}) {
 
             
 
-            <CheckBoxModule moduleState={filterState} filterReducer={onFilterChange} />
+            {/*<CheckBoxModule moduleState={filterState} filterReducer={onFilterChange} />*/}
             < CheckBox 
             id="low-population" 
             labelText="Hide Low Population Municipalities"
