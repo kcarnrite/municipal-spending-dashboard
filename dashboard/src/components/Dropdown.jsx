@@ -7,7 +7,6 @@ function Dropdown({ text, children, className}) {
     useEffect(() => {
         function handleClickOutside() {
             if(dropdownRef.current && !dropdownRef.current.contains(event.target)) {
-                console.log("HANDLE CLICK ACTIVATED")
                 setListActive(false)
             }
         }
