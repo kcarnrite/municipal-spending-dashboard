@@ -6,8 +6,8 @@ from constants import FRONTEND_HOSTS
 
 app = Flask(__name__)
 #TODO: CONFIGURE CORS CORRECTLY
-#CORS(app, origins=FRONTEND_HOSTS)
-CORS(app)
+CORS(app, origins=FRONTEND_HOSTS)
+#CORS(app)
 
 @app.route("/")
 def hello_world():
