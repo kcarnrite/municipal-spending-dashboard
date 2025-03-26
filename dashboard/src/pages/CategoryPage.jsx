@@ -46,10 +46,12 @@ function CategoryPage() {
     }
   );
     return (
-        <div className="flex content-center flex-col grow-0 mx-32">
+        <div className="flex content-center flex-col grow-0 mx-8 md:mx-32">
         <h1 className="text-center text-4xl font-bold font-mono text-green-900" >Spending By Category</h1>
         <div>
-            <FilterControls onFilterChange={filterReducer} filterState={filterState} />
+            <div className="self-auto justify-items-center">
+              <FilterControls onFilterChange={filterReducer} filterState={filterState} />
+            </div>
             <div className="self-auto justify-items-center">
                 <Table headers={data_headers} table_content={data_items} filters={filterState}/>
             </div>
