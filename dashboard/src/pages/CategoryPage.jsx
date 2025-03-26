@@ -23,7 +23,7 @@ function CategoryPage() {
       case 'UT':
         return {...state,UT: !state.UT,}
       case 'CHANGE_QUERY':
-        return {...state, query: action.payload}
+        return {...state, query: action.payload[0], categoryDescription: action.payload[1]}
       case 'CHANGE_MEASUREMENT':
         return {...state, measurement: action.payload}
       case "HIDE_LOW_POPULATION":
@@ -41,6 +41,7 @@ function CategoryPage() {
       UT: true,
       hideLowPopulation: true,
       query: '240',
+      categoryDescription: 'General Government/Governance',
       measurement: ['Per Capita', 'perCapita'],
       searchTerm: '',
     }
@@ -48,10 +49,12 @@ function CategoryPage() {
     return (
         <div className="flex content-center flex-col grow-0 mx-8 md:mx-32">
         <h1 className="text-center text-4xl font-bold font-mono text-green-900" >Spending By Category</h1>
+
         <div>
             <div className="self-auto justify-items-center">
               <FilterControls onFilterChange={filterReducer} filterState={filterState} />
             </div>
+            <h1 className="text-center text-xl font-bold font-mono text-green-900 pb-4" >{filterState.categoryDescription}</h1>
             <div className="self-auto justify-items-center">
                 <Table headers={data_headers} table_content={data_items} filters={filterState}/>
             </div>

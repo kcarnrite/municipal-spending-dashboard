@@ -30,55 +30,95 @@ function FilterControls({filterState, onFilterChange}) {
                         <>
                     <SubList text='General Government'>
                         {categories['General Government'].map(item => {
-                        return (<ListItem text={item[1]} onClick={(event) => onFilterChange({type:'CHANGE_QUERY', payload:item[0]})} />)
+                        return (
+                            <ListItem 
+                                text={item[1]} 
+                                onClick={(event) => onFilterChange({type:'CHANGE_QUERY', payload:[item[0], 'General Government/' + item[1]]})} 
+                            />
+                        )
                         })}
                     </SubList>
 
                     <SubList text='Protection Services'>
                         {categories['Protection Services'].map(item => {
-                        return (<ListItem text={item[1]} onClick={(event) => onFilterChange({type:'CHANGE_QUERY', payload:item[0]})} />)
+                        return (
+                            <ListItem 
+                                text={item[1]} 
+                                onClick={(event) => onFilterChange({type:'CHANGE_QUERY', payload:[item[0], 'Protection Services/' + item[1]]})} 
+                            />
+                        )
                         })}
                     </SubList>
 
                     <SubList text='Transportation Services'>
                         {categories['Transportation Services'].map(item => {
-                        return (<ListItem text={item[1]} onClick={(event) => onFilterChange({type:'CHANGE_QUERY', payload:item[0]})} />)
+                        return (
+                            <ListItem 
+                                text={item[1]} 
+                                onClick={(event) => onFilterChange({type:'CHANGE_QUERY', payload:[item[0], 'Transportation Services/' + item[1]] })} 
+                            />
+                        )
                         })}
                     </SubList>
 
                     <SubList text='Environmental Services'>
                         {categories['Environmental Services'].map(item => {
-                        return (<ListItem text={item[1]} onClick={(event) => onFilterChange({type:'CHANGE_QUERY', payload:item[0]})} />)
+                        return (
+                            <ListItem 
+                                text={item[1]} 
+                                onClick={(event) => onFilterChange({type:'CHANGE_QUERY', payload:[item[0], 'Environmental Services/' + item[1]] })} 
+                                />
+                            )
                         })}
                     </SubList>
 
                     <SubList text='Health Services'>
                         {categories['Health Services'].map(item => {
-                        return (<ListItem text={item[1]} onClick={(event) => onFilterChange({type:'CHANGE_QUERY', payload:item[0]})} />)
+                        return (
+                            <ListItem 
+                                text={item[1]} 
+                                onClick={(event) => onFilterChange({type:'CHANGE_QUERY', payload:[item[0], 'Health Services/' + item[1]] })} 
+                                />
+                            )
                         })}
                     </SubList>
 
                     <SubList text='Social and Family Services'>
                         {categories['Social and Family Services'].map(item => {
-                        return (<ListItem text={item[1]} onClick={(event) => onFilterChange({type:'CHANGE_QUERY', payload:item[0]})} />)
+                        return (
+                            <ListItem 
+                                text={item[1]} 
+                                onClick={(event) => onFilterChange({type:'CHANGE_QUERY', payload:[item[0], 'Social and Family Services/' + item[1]] })} 
+                            />
+                        )
                         })}
 
                     </SubList>
                     
                     <SubList text='Recreation and Cultural Services'>
                         {categories['Recreation and Cultural Services'].map(item => {
-                        return (<ListItem text={item[1]} onClick={(event) => onFilterChange({type:'CHANGE_QUERY', payload:item[0]})} />)
+                        return (
+                            <ListItem 
+                                text={item[1]} 
+                                onClick={(event) => onFilterChange({type:'CHANGE_QUERY', payload:[item[0], 'Recreation and Cultural Services/' + item[1]]})} 
+                            />
+                        )
                         })}
                     </SubList>
 
                     <SubList text='Planning and Development'>
                         {categories['Planning and Development'].map(item => {
-                        return (<ListItem text={item[1]} onClick={(event) => onFilterChange({type:'CHANGE_QUERY', payload:item[0]})} />)
+                        return (
+                            <ListItem 
+                                text={item[1]} 
+                                onClick={(event) => onFilterChange({type:'CHANGE_QUERY', payload:[item[0], 'Planning and Development/' + item[1]]})} 
+                            />
+                        )
                         })}
                     </SubList>
 
-                    <ListItem text='Other' onClick={event => onFilterChange({type:'CHANGE_QUERY', payload:1910})}/>
-                    <ListItem text='Total' onClick={event => onFilterChange({type:'CHANGE_QUERY', payload:9910})}/>
+                    <ListItem text='Other' onClick={event => onFilterChange({type:'CHANGE_QUERY', payload:[1910, 'Other']})}/>
+                    <ListItem text='Total' onClick={event => onFilterChange({type:'CHANGE_QUERY', payload:[9910, 'Total']})}/>
                     </>
                     
                     ) : <ListItem text='Loading...'/>
