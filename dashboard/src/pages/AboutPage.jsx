@@ -12,7 +12,7 @@ function AboutPage() {
     const paragraphStyling = "text-md my-2";
     const paragraphSpacing = "mb-12";
     return (
-        <div className="mx-32">
+        <div className="mx-8 md:mx-32">
         <div className={paragraphSpacing}>
             <h1 className={headerStyling}>What is the point of this project?</h1>
             <p className={paragraphStyling}>
@@ -38,7 +38,7 @@ function AboutPage() {
         <h1 className={headerStyling}>Where is the data from?</h1>
         <p className={paragraphStyling}>
             The raw expense data that appears on this site was collected from Financial Information Returns published on
-            the <a href="https://data.ontario.ca/dataset/financial-information-return-fir-for-municipalities" className="text-primary">
+            the <a href="https://data.ontario.ca/dataset/financial-information-return-fir-for-municipalities" className="text-primary font-bold">
              Data Ontario Site</a>. 
             The population data used was gathered in Statistics Canada's 2016 Census Profile. 
         </p>
