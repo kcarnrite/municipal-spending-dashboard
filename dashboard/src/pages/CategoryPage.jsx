@@ -30,6 +30,8 @@ function CategoryPage() {
         return {...state, hideLowPopulation: !state.hideLowPopulation }
       case 'CHANGE_SEARCH_TERM':
         return {...state, searchTerm: action.payload}
+      case 'CHANGE_YEAR':
+        return {...state, year: action.payload}
       default:
         throw new Error("Action not declared")
     }
@@ -44,6 +46,7 @@ function CategoryPage() {
       categoryDescription: 'General Government/Governance',
       measurement: ['Per Capita', 'perCapita'],
       searchTerm: '',
+      year: '2023',
     }
   );
     return (

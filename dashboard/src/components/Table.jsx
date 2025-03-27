@@ -25,14 +25,14 @@ function Table({headers, filters}) {
     filters.hideLowPopulation ? minimumPopulation = 10000 : minimumPopulation = 0;
     useEffect(() => {
         dispatchTable({type:"FETCH_INIT"})
-        fetch(APIBASEURL + `line/${filters.query}/${filters.measurement[1]}?` + new URLSearchParams({
+        fetch(APIBASEURL + `line/${filters.query}/${filters.year}/${filters.measurement[1]}?` + new URLSearchParams({
             minPopulation: minimumPopulation,
         }).toString())
         .then(response => response.json())
         .then(data => {
             dispatchTable({type: 'FETCH_SUCCESS', payload: data});
         }).catch(() => dispatchTable({type: 'FETCH_FAIL'}))
-    }, [filters.query, filters.measurement, filters.hideLowPopulation])
+    }, [filters.query, filters.measurement, filters.hideLowPopulation, filters.year])
 
     function handleSort(id) {
         if(sortBy == id) {

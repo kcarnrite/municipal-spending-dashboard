@@ -9,10 +9,17 @@ const APIBASEURL = 'http://localhost:5000/api/'
 
 function FilterControls({filterState, onFilterChange}) {
     const [categories, setCategories] = useState([])
+    const [years, setYears] = useState([]);
     useEffect(() => {
         fetch(`${APIBASEURL}get_categories`)
         .then(response => response.json())
         .then(data => setCategories(data))
+    }, [])
+
+    useEffect(() => {
+        fetch(`${APIBASEURL}get_years`)
+        .then(response => response.json())
+        .then(data => setYears(data))
     }, [])
 
     return (
@@ -128,6 +135,12 @@ function FilterControls({filterState, onFilterChange}) {
                 <Dropdown text={filterState.measurement[0]}>
                     <ListItem text="Total" onClick={(event) => onFilterChange({type:'CHANGE_MEASUREMENT', payload:["Total", "total"]})} />
                     <ListItem text="Per Capita" onClick={(event => onFilterChange({type:'CHANGE_MEASUREMENT', payload:["Per Capita", 'perCapita']}))} />
+                </Dropdown>
+
+                <Dropdown text={filterState.year}>
+                    {years.map(year => (
+                        <ListItem key={year[0]} text={year[0]} onClick={(event) => onFilterChange({type: 'CHANGE_YEAR', payload:year[0]})} />
+                    ))}
                 </Dropdown>
       
         </div>
