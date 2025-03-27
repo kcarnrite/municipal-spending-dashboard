@@ -13,13 +13,13 @@ CORS(app, origins=FRONTEND_HOSTS)
 def hello_world():
     return "<p>Hello, World!</p>"
 
-@app.route("/api/line/<line_number>/<measurement>", methods=["GET"])
-def get_by_line_number(measurement, line_number):
+@app.route("/api/line/<line_number>/<year>/<measurement>", methods=["GET"])
+def get_by_line_number(measurement, year, line_number):
     min_population = request.args.get('minPopulation')
     if(measurement == 'total'):
-        return_object = db.get_total_data(line_number, min_population)
+        return_object = db.get_total_data(line_number, year, min_population)
     elif(measurement == 'perCapita'):
-        return_object = pop_data.get_data_by_category(line_number, min_population)
+        return_object = pop_data.get_data_by_category(line_number, year, min_population)
     else:
         print(measurement)
         assert()
@@ -39,4 +39,10 @@ def get_categories():
         'Planning and Development': db.get_categories(1810,1899),
         'Other': db.get_categories(1910,1910),
         'Total': db.get_categories(9910,9910)}
-    return categories 
+    return categories
+
+@app.route("/api/get_years")
+def get_available_years():
+    data = db.get_years()
+    return data
+
