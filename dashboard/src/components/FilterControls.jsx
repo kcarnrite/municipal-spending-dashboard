@@ -133,8 +133,15 @@ function FilterControls({filterState, onFilterChange}) {
                 </Dropdown>
                 
                 <Dropdown text={filterState.measurement[0]}>
-                    <ListItem text="Total" onClick={(event) => onFilterChange({type:'CHANGE_MEASUREMENT', payload:["Total", "total"]})} />
-                    <ListItem text="Per Capita" onClick={(event => onFilterChange({type:'CHANGE_MEASUREMENT', payload:["Per Capita", 'perCapita']}))} />
+                    <ListItem 
+                        text="Total" 
+                        onClick={(event) => onFilterChange({type:'CHANGE_MEASUREMENT', payload:["Total", "total"]})} />
+                    <ListItem 
+                        text="Per Capita" 
+                        onClick={(event => onFilterChange({type:'CHANGE_MEASUREMENT', payload:["Per Capita", 'perCapita']}))} />
+                    <ListItem 
+                        text="% of Spending" 
+                        onClick={(event) => onFilterChange({type:'CHANGE_MEASUREMENT', payload:['% of Spending', 'percentage']})} />
                 </Dropdown>
 
                 <Dropdown text={filterState.year}>

@@ -45,7 +45,6 @@ function Table({headers, filters}) {
     }
 
 
-
     // Filter table items depending on filter state without altering data state 
     var tableItems = table.data;
     if(!filters.ST) {
@@ -75,10 +74,10 @@ function Table({headers, filters}) {
 
         if(sortBy != 0) {
             if(descending) {
-                return parseInt(a[sortBy]) < parseInt(b[sortBy]) ? -1 : 1;
+                return parseFloat(a[sortBy]) < parseFloat(b[sortBy]) ? -1 : 1;
             }
             else {
-                return parseInt(a[sortBy]) > parseInt(b[sortBy]) ? -1 : 1;
+                return parseFloat(a[sortBy]) > parseFloat(b[sortBy]) ? -1 : 1;
             }
         }
         else {
@@ -113,7 +112,7 @@ function Table({headers, filters}) {
                 <tbody>
                         {tableItems.map((item, idx) => (
                             <tr className="border-2 border-black" key={idx}>
-                                    <Item data={item} key={idx} />
+                                    <Item data={item} key={idx} isDollarAmount={!(filters.measurement[1] == 'percentage')}/>
                             </tr>
                         ))}
                 </tbody>
@@ -123,13 +122,20 @@ function Table({headers, filters}) {
         }
     
     }
-
-function Item({data}) {
+//
+function Item({data, isDollarAmount}) {
     return (
         <>
         <td className="border-2 border-black m-2">{data[0]}</td>
         <td className="border-2 border-black tabular-nums text-right">
-            ${String(data[1]).replace(/\B(?=(\d{3})+(?!\d))/g,",")}
+            {isDollarAmount ? 
+            (
+                '$' + String(data[1]).replace(/\B(?=(\d{3})+(?!\d))/g,",")
+            
+            ) : (
+                (data[1]*100).toFixed(2) + '%'
+            )
+        }
         </td>
         </>
     )

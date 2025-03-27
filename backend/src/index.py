@@ -20,6 +20,8 @@ def get_by_line_number(measurement, year, line_number):
         return_object = db.get_total_data(line_number, year, min_population)
     elif(measurement == 'perCapita'):
         return_object = pop_data.get_data_by_category(line_number, year, min_population)
+    elif(measurement == 'percentage'):
+        return_object = db.get_by_percentage_data(line_number, year, min_population)
     else:
         print(measurement)
         assert()
