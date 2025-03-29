@@ -26,8 +26,8 @@ function Dropdown({ text, children, className}) {
         }
     }
     return (
-        <div onClick={handleClick} className={"bg-white rounded-md shadow-md" } ref={dropdownRef}>
-            <div className="flex flex-row select-none rounded-md items-center justify-items-start gap-4 px-4 hover:bg-gray-300">
+        <div onClick={handleClick} className={"bg-white rounded-md shadow-md hover:bg-gray-300" } ref={dropdownRef}>
+            <div className="flex flex-row select-none rounded-md items-center justify-items-start gap-4 px-4 ">
                 <p >{children ? text : 'Loading...'}</p>
                 <p className="text-xs justify-self-end">▼</p>
             </div>
@@ -61,7 +61,7 @@ function SubList({ text, children }) {
         setListActive(!listActive)
     }
     return (
-        <div onClick={handleClick} data-type="sublist" className="flex flex-row select-none px-6 bg-gray-100 hover:bg-gray-300" ref={dropdownRef}>
+        <div onClick={handleClick} data-type="sublist" className="flex flex-row select-none px-6 bg-gray-100 hover:bg-gray-300 border" ref={dropdownRef}>
             <p data-type="sublist">{text}</p>
             <div className="flex flex-col absolute md:left-full shadow-lg w-fit ">
                 {listActive ? children : null}
@@ -73,7 +73,7 @@ function SubList({ text, children }) {
 function ListItem({ text, onClick}) {
     return (
         <div>
-            <p data-type="item" className="select-none px-6 hover:bg-gray-300 bg-gray-100 md:text-nowrap"onClick={onClick}>
+            <p data-type="item" className="select-none px-6 hover:bg-gray-300 bg-gray-100 md:text-nowrap border"onClick={onClick}>
                 {text}
             </p>
         </div>
