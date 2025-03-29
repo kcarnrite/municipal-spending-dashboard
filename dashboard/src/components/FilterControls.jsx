@@ -23,14 +23,10 @@ function FilterControls({filterState, onFilterChange}) {
     }, [])
 
     return (
-        <div className="mx-30 md:flex-nowrap flex-wrap flex gap-8 my-2">
-            <SearchBar 
-                searchState={filterState.searchTerm} 
-                setSearchState={event => onFilterChange({type: 'CHANGE_SEARCH_TERM', payload:event.target.value})}/>
-            
-            <div className="flex flex-row gap-4">
-                
+        <div className="mx-30 md:flex-nowrap flex-wrap flex gap-16 my-2">
+            <div className="flex flex-row gap-4 align-items-center">
       
+                {/*Category dropdown */}
                 <Dropdown text="Category">
                 {
                    (categories['General Government']) ? (
@@ -132,6 +128,7 @@ function FilterControls({filterState, onFilterChange}) {
                 }
                 </Dropdown>
                 
+                {/* Measurement dropdown */}
                 <Dropdown text={filterState.measurement[0]}>
                     <ListItem 
                         text="Total" 
@@ -143,7 +140,8 @@ function FilterControls({filterState, onFilterChange}) {
                         text="% of Spending" 
                         onClick={(event) => onFilterChange({type:'CHANGE_MEASUREMENT', payload:['% of Spending', 'percentage']})} />
                 </Dropdown>
-
+                
+                {/* Year dropdown */}
                 <Dropdown text={filterState.year}>
                     {years.map(year => (
                         <ListItem key={year[0]} text={year[0]} onClick={(event) => onFilterChange({type: 'CHANGE_YEAR', payload:year[0]})} />
@@ -151,7 +149,6 @@ function FilterControls({filterState, onFilterChange}) {
                 </Dropdown>
       
         </div>
-
             
             <MoreFilters>
                 <div>
@@ -164,6 +161,7 @@ function FilterControls({filterState, onFilterChange}) {
                 </div>
             </MoreFilters>
         </div>
+           
     );
 
 }

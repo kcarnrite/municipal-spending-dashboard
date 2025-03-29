@@ -21,7 +21,7 @@ function MoreFilters({children}) {
     }, [isActive])
     return (
         <div 
-            className="shadow-md invisible md:visible rounded-md select-none"
+            className="shadow-md hidden md:inline rounded-md select-none"
             ref={dropdownRef}>
              
             <div className='hover:bg-gray-300 px-4 rounded-md' onClick={() => setIsActive(!isActive)}>

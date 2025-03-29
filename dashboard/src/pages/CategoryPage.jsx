@@ -3,6 +3,7 @@ import FilterControls from "../components/FilterControls"
 import Table from "../components/Table"
 import { createRoute } from "@tanstack/react-router"
 import { rootRoute } from "../App"
+import SearchBar from "../components/SearchBar"
 
 export const indexRoute = createRoute({
   getParentRoute: () => rootRoute,
@@ -51,14 +52,18 @@ function CategoryPage() {
   );
     return (
         <div className="flex content-center flex-col grow-0 mx-8 md:mx-32">
-        <h1 className="text-center text-4xl font-bold font-mono text-green-900" >Spending By Category</h1>
+        <h1 className="text-center text-4xl pb-8 md:pb-4 font-bold font-mono text-green-900" >Spending By Category</h1>
 
         <div>
             <div className="self-auto justify-items-center">
               <FilterControls onFilterChange={filterReducer} filterState={filterState} />
+              <h1 className="text-center text-xl font-bold font-mono text-green-900 pb-4" >{filterState.categoryDescription}</h1>
+              <SearchBar 
+                searchState={filterState.searchTerm} 
+                setSearchState={event => filterReducer({type: 'CHANGE_SEARCH_TERM', payload:event.target.value})}/>
             </div>
-            <h1 className="text-center text-xl font-bold font-mono text-green-900 pb-4" >{filterState.categoryDescription}</h1>
-            <div className="self-auto justify-items-center">
+             
+            <div className="self-auto justify-items-center py-4">
                 <Table headers={data_headers} table_content={data_items} filters={filterState}/>
             </div>
         </div>
